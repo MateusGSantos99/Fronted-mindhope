@@ -1,0 +1,83 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import "tailwindcss"; /* Importa todas as utilidades do TailwindCSS */
+
+/* ==============================
+   Paleta de cores personalizada
+   ============================== */
+@theme {
+  --color-dark: #172738;       
+  --color-medium: #005FA3;   
+  --color-light: #2EC4F3;      
+  --color-accent: #1A73E8;    
+  --color-button: #1E293B;     
+  --color-background: #F5F9FF;
+}
+
+/* ==============================
+   Classes utilitárias de cores
+   ============================== */
+/* Fundo */
+.bg-dark { background-color: var(--color-dark); }
+.bg-medium { background-color: var(--color-medium); }
+.bg-light { background-color: var(--color-light); }
+.bg-accent { background-color: var(--color-accent); }
+.bg-button { background-color: var(--color-button); }
+.bg-background { background-color: var(--color-background); }
+
+/* Texto */
+.text-dark { color: var(--color-dark); }
+.text-medium { color: var(--color-medium); }
+.text-light { color: var(--color-light); }
+.text-accent { color: var(--color-accent); }
+
+/* ==============================
+   Estilo global do body
+   ============================== */
+body {
+  font-family: 'Inter', 'Nunito', 'Roboto', sans-serif;
+  font-weight: 500;
+  background: linear-gradient(
+    90deg,
+    var(--color-light) 0%,       /* Azul claro */
+    var(--color-medium) 50%,     /* Azul médio */
+    var(--color-dark) 100%       /* Azul escuro */
+  );
+  min-height: 100vh;
+  color: white; /* Texto padrão em branco */
+}
+
+/* ==============================
+   Botões
+   ============================== */
+.btn-primary {
+  background: var(--color-button); /* Botão escuro */
+  color: white;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px; /* Borda arredondada tipo pill */
+  font-weight: bold;
+  transition: all 0.3s ease;
+}
+.btn-primary:hover {
+  background: var(--color-accent); /* Azul de destaque no hover */
+  transform: scale(1.05);
+}
+
+/* ==============================
+   Campos de input
+   ============================== */
+   .input-field {
+    background: white;                 /* fundo branco */
+    border: 1px solid #ccc;            /* borda cinza clara */
+    color: #172738;                    /* texto escuro */
+    border-radius: 0.5rem;             /* cantos arredondados */
+    padding: 0.75rem 1rem;             /* espaçamento interno */
+    width: 100%;                       /* ocupa toda largura */
+    transition: all 0.3s ease;
+  }
+  
+  .input-field:focus {
+    border-color: var(--color-light);  /* azul claro no foco */
+    box-shadow: 0 0 0 3px rgba(46, 196, 243, 0.3);
+    outline: none;
+  }
+  
