@@ -8,7 +8,7 @@ import { Bell } from 'lucide-react';
 import toast from 'react-hot-toast'; 
 import { PsychologistSelect } from '../components/PsychologistSelect';
 
-export const Agendamento = () => {
+export const Agendamentos = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
 

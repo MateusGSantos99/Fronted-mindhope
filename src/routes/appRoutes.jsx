@@ -1,37 +1,47 @@
+// Importação de rotas do React Router
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+
+// Importa contexto de autenticação
 import { useAuth } from '../context/AuthContext';
+
+// Componentes reutilizáveis
 import { Sidebar } from '../components/Sidebar';
 import { PublicNavbar } from '../components/PublicNavbar';
 import { LoadingSpinner } from '../components/LoadingSpinner';
-import Home from '../pages/Home';
+
+// Páginas públicas
+import  Home  from '../pages/Home';
 import { About } from '../pages/About';
 import { Login } from '../pages/Login';
 import { Register } from '../pages/Register';
+
+// Páginas protegidas (apenas para usuários autenticados)
 import { DashboardPsicologo } from '../pages/DashboardPsicologo';
 import { DashboardPaciente } from '../pages/DashboardPaciente';
-import { NotFound } from '../pages/NotFound';
-import { Agendamento } from '../pages/Agendamentos'; 
-import { ChatIA } from '../pages/ChatIa';
+import { Agendamentos } from '../pages/Agendamentos';
 import { Relatorios } from '../pages/Relatorios';
-import { Solicitacoes } from '../pages/Solicitacoes';
 import { Pacientes } from '../pages/Pacientes';
 import { PacienteDetalhes } from '../pages/PacienteDetalhes';
 import { SessaoDetalhes } from '../pages/SessaoDetalhes';
+import { ChatIA } from '../pages/ChatIA';
+import { Solicitacoes } from '../pages/Solicitacoes';
+import { Historico } from '../pages/Historico';
+import { NotFound } from '../pages/NotFound';
 
 /* ==============================
    Componente de rota protegida
    ============================== */
 const ProtectedRoute = ({ children }) => {
-  const { user, loading } = useAuth();
-
-  if (loading) return <LoadingSpinner size="lg" />;
-  if (!user) return <Navigate to="/login" replace />;
-
+  const { user, loading } = useAuth(); // Obtém usuário e estado de carregamento
+  
+  if (loading) return <LoadingSpinner size="lg" />; // Mostra spinner enquanto carrega
+  if (!user) return <Navigate to="/login" replace />; // Redireciona não autenticados para login
+  
   return (
     <div className="min-h-screen flex">
-      <Sidebar />
+      <Sidebar /> {/* Sidebar lateral sempre visível */}
       <main className="flex-1 lg:ml-64 p-8">
-        {children}
+        {children} {/* Conteúdo da página protegida */}
       </main>
     </div>
   );
@@ -41,16 +51,16 @@ const ProtectedRoute = ({ children }) => {
    Componente de rota pública
    ============================== */
 const PublicRoute = ({ children }) => {
-  const { user, loading } = useAuth();
-
-  if (loading) return <LoadingSpinner size="lg" />;
-  if (user) return <Navigate to="/dashboard" replace />;
-
+  const { user, loading } = useAuth(); // Obtém usuário e estado de carregamento
+  
+  if (loading) return <LoadingSpinner size="lg" />; // Mostra spinner enquanto carrega
+  if (user) return <Navigate to="/dashboard" replace />; // Redireciona usuário logado para dashboard
+  
   return (
     <div className="min-h-screen">
-      <PublicNavbar />
+      <PublicNavbar /> {/* Navbar pública */}
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        {children}
+        {children} {/* Conteúdo da página pública */}
       </main>
     </div>
   );
@@ -61,6 +71,7 @@ const PublicRoute = ({ children }) => {
    ============================== */
 const Dashboard = () => {
   const { user } = useAuth();
+  // Retorna dashboard específico baseado no tipo do usuário
   return user?.type === 'psicologo' ? <DashboardPsicologo /> : <DashboardPaciente />;
 };
 
@@ -72,70 +83,94 @@ export const AppRoutes = () => {
     <Router>
       <Routes>
 
-        {/* Rotas Públicas */}
+        {/* ==============================
+           Rotas Públicas
+           ============================== */}
         <Route path="/" element={
-          <PublicRoute><Home /></PublicRoute>
+          <PublicRoute>
+            <Home />
+          </PublicRoute>
         } />
+        
         <Route path="/about" element={
-          <PublicRoute><About /></PublicRoute>
+          <PublicRoute>
+            <About />
+          </PublicRoute>
         } />
+        
         <Route path="/login" element={
-          <PublicRoute><Login /></PublicRoute>
+          <PublicRoute>
+            <Login />
+          </PublicRoute>
         } />
+        
         <Route path="/register" element={
-          <PublicRoute><Register /></PublicRoute>
+          <PublicRoute>
+            <Register />
+          </PublicRoute>
         } />
-
-        {/* Rotas Protegidas */}
+        
+        {/* ==============================
+           Rotas Protegidas
+           ============================== */}
         <Route path="/dashboard" element={
-          <ProtectedRoute><Dashboard /></ProtectedRoute>
+          <ProtectedRoute>
+            <Dashboard /> {/* Escolhe dashboard de psicólogo ou paciente */}
+          </ProtectedRoute>
         } />
-
-        <Route path="*" element={<NotFound />} />
-
-        <Route path="/agendamento" element={
-          <ProtectedRoute><Agendamento/></ProtectedRoute>
-        } /> 
+        
+        <Route path="/agendamentos" element={
+          <ProtectedRoute>
+            <Agendamentos />
+          </ProtectedRoute>
+        } />
+        
+        <Route path="/solicitacoes" element={
+          <ProtectedRoute>
+            <Solicitacoes />
+          </ProtectedRoute>
+        } />
+        
+        <Route path="/pacientes" element={
+          <ProtectedRoute>
+            <Pacientes />
+          </ProtectedRoute>
+        } />
+        
+        <Route path="/pacientes/:id" element={
+          <ProtectedRoute>
+            <PacienteDetalhes /> {/* Página de detalhes de paciente específico */}
+          </ProtectedRoute>
+        } />
+        
+        <Route path="/sessao/:sessionId" element={
+          <ProtectedRoute>
+            <SessaoDetalhes /> {/* Detalhes de sessão específica */}
+          </ProtectedRoute>
+        } />
         
         <Route path="/chat-ia" element={
           <ProtectedRoute>
-            <ChatIA/>
-            </ProtectedRoute>
-        } /> 
-
+            <ChatIA />
+          </ProtectedRoute>
+        } />
+        
         <Route path="/relatorios" element={
-                  <ProtectedRoute>
-                    <Relatorios/>
-                    </ProtectedRoute>
-                } /> 
-
-<Route path="/solicitacoes" element={
-                  <ProtectedRoute>
-                    <Solicitacoes/>
-                    </ProtectedRoute>
-                } />
-
-<Route path="/pacientes" element={
-                  <ProtectedRoute>
-                    <Pacientes/>
-                    </ProtectedRoute>
-                } /> 
-
-<Route path="/pacientes/:id" element={
-                  <ProtectedRoute>
-                    <PacienteDetalhes/>
-                    </ProtectedRoute>
-                } /> 
-
-<Route path="/sessao/:sessionId" element={
-                  <ProtectedRoute>
-                    <SessaoDetalhes/>
-                  </ProtectedRoute>
-                } />
- 
-
-
-
+          <ProtectedRoute>
+            <Relatorios />
+          </ProtectedRoute>
+        } />
+        
+        <Route path="/historico" element={
+          <ProtectedRoute>
+            <Historico />
+          </ProtectedRoute>
+        } />
+        
+        {/* ==============================
+           Rota para página 404
+           ============================== */}
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>
   );

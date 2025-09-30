@@ -1,28 +1,17 @@
 import { useState, useEffect } from 'react';
-
 import { useAuth } from '../context/AuthContext';
-
 import { mockApi } from '../services/mockApi';
-
 import { Card } from '../components/Card';
-
 import { Button } from '../components/Button';
-
 import { LoadingSpinner } from '../components/LoadingSpinner';
-
 import { Bell, User, Clock, AlertCircle, CheckCircle, X } from 'lucide-react';
-
 import { RejectionForm } from '../components/RejectionForm';
-
 import toast from 'react-hot-toast';
 
 export const Solicitacoes = () => {
   const { user } = useAuth();
-
   const [requests, setRequests] = useState([]);
-
   const [loading, setLoading] = useState(true);
-
   const [processingRequests, setProcessingRequests] = useState(new Set());
 
   // Estado para controlar qual solicitação está exibindo o formulário de rejeição

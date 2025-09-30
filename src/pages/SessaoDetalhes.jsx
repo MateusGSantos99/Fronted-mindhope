@@ -6,7 +6,7 @@ import { Card } from '../components/Card';
 import { Button } from '../components/Button';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { ArrowLeft, Clock, Calendar, User, FileText, Edit3, Save, X } from 'lucide-react';
- 
+
 export const SessaoDetalhes = () => {
   const { sessionId } = useParams();
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ export const SessaoDetalhes = () => {
   const [editNotes, setEditNotes] = useState('');
   const [editReport, setEditReport] = useState('');
   const [editStatus, setEditStatus] = useState('');
- 
+
   useEffect(() => {
     const loadSessionData = async () => {
       try {
@@ -27,7 +27,7 @@ export const SessaoDetalhes = () => {
         setEditNotes(sessionData.notes || '');
         setEditReport(sessionData.fullReport || '');
         setEditStatus(sessionData.status);
- 
+
         const patients = await mockApi.getPatients(user.id);
         const patientData = patients.find(p => p.id === sessionData.patientId);
         setPatient(patientData);
@@ -38,47 +38,47 @@ export const SessaoDetalhes = () => {
         setLoading(false);
       }
     };
- 
+
     loadSessionData();
   }, [sessionId, user.id, navigate]);
- 
+
   const handleSave = async () => {
     try {
       await mockApi.updateSessionStatus(session.id, editStatus);
       await mockApi.updateSessionNotes(session.id, editNotes, editReport);
-     
+      
       setSession({
         ...session,
         status: editStatus,
         notes: editNotes,
         fullReport: editReport
       });
-     
+      
       setEditing(false);
     } catch (error) {
       console.error('Erro ao salvar alterações:', error);
     }
   };
- 
+
   const handleCancel = () => {
     setEditNotes(session.notes || '');
     setEditReport(session.fullReport || '');
     setEditStatus(session.status);
     setEditing(false);
   };
- 
+
   if (loading) return <LoadingSpinner size="lg" />;
   if (!session || !patient) return null;
- 
+
   const statusOptions = [
     { value: 'agendado', label: 'Agendado', color: 'bg-blue-100 text-blue-800' },
     { value: 'iniciado', label: 'Iniciado', color: 'bg-yellow-100 text-yellow-800' },
     { value: 'concluido', label: 'Concluído', color: 'bg-green-100 text-green-800' },
     { value: 'cancelado', label: 'Cancelado', color: 'bg-red-100 text-red-800' }
   ];
- 
+
   const currentStatus = statusOptions.find(s => s.value === session.status);
- 
+
   return (
     <div className="space-y-6">
       {/* Header */}
@@ -93,12 +93,12 @@ export const SessaoDetalhes = () => {
           </button>
           <h1 className="text-3xl font-bold text-white">Detalhes da Sessão</h1>
         </div>
- 
+
         <div className="flex items-center gap-3">
           {!editing ? (
             <Button
               onClick={() => setEditing(true)}
-              className=" bg-white flex items-center gap-2"
+              className="flex items-center gap-2"
             >
               <Edit3 size={16} />
               Editar
@@ -115,7 +115,7 @@ export const SessaoDetalhes = () => {
               <Button
                 variant="secondary"
                 onClick={handleCancel}
-                className="bg-white flex items-center gap-2"
+                className="flex items-center gap-2"
               >
                 <X size={16} />
                 Cancelar
@@ -124,7 +124,7 @@ export const SessaoDetalhes = () => {
           )}
         </div>
       </div>
- 
+
       {/* Informações da Sessão */}
       <Card>
         <div className="space-y-6">
@@ -133,7 +133,7 @@ export const SessaoDetalhes = () => {
               <h2 className="text-2xl font-bold text-dark">Sessão #{session.id}</h2>
               <p className="text-dark/60">{session.description}</p>
             </div>
-           
+            
             {editing ? (
               <select
                 value={editStatus}
@@ -152,7 +152,7 @@ export const SessaoDetalhes = () => {
               </span>
             )}
           </div>
- 
+
           <div className="grid md:grid-cols-3 gap-6">
             <div className="flex items-center gap-3">
               <User className="w-5 h-5 text-dark/60" />
@@ -161,7 +161,7 @@ export const SessaoDetalhes = () => {
                 <p className="font-semibold text-dark">{patient.name}</p>
               </div>
             </div>
- 
+
             <div className="flex items-center gap-3">
               <Calendar className="w-5 h-5 text-dark/60" />
               <div>
@@ -171,9 +171,9 @@ export const SessaoDetalhes = () => {
                 </p>
               </div>
             </div>
- 
+
             <div className="flex items-center gap-3">
-              <Clock className="w-5 h-5 text-dark/60" />
+              <Clock className="w-5 h-5 text-white" />
               <div>
                 <p className="text-sm text-dark/60">Duração</p>
                 <p className="font-semibold text-dark">{session.duration} minutos</p>
@@ -182,7 +182,7 @@ export const SessaoDetalhes = () => {
           </div>
         </div>
       </Card>
- 
+
       {/* Anotações Rápidas */}
       <Card>
         <div className="space-y-4">
@@ -190,7 +190,7 @@ export const SessaoDetalhes = () => {
             <FileText className="w-5 h-5 text-dark" />
             <h3 className="text-xl font-bold text-dark">Anotações Rápidas</h3>
           </div>
- 
+
           {editing ? (
             <textarea
               value={editNotes}
@@ -209,7 +209,7 @@ export const SessaoDetalhes = () => {
           )}
         </div>
       </Card>
- 
+
       {/* Relatório Completo */}
       <Card>
         <div className="space-y-4">
@@ -217,7 +217,7 @@ export const SessaoDetalhes = () => {
             <FileText className="w-5 h-5 text-dark" />
             <h3 className="text-xl font-bold text-dark">Relatório Completo da Sessão</h3>
           </div>
- 
+
           {editing ? (
             <textarea
               value={editReport}
@@ -241,5 +241,3 @@ export const SessaoDetalhes = () => {
     </div>
   );
 };
- 
- 
