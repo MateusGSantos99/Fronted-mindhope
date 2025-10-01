@@ -119,11 +119,8 @@ Maria Santos	paciente@test.com
 Fluxo básico
 
 Faça login com uma das contas de teste.
-
 Acesse o dashboard correspondente ao seu perfil.
-
 Pacientes podem agendar consultas, selecionando psicólogo e horário.
-
 Psicólogos podem gerenciar pacientes, sessões e visualizar relatórios.
 
 ## 📁 Organização do Código
@@ -199,27 +196,19 @@ Cada requisição tem um pequeno delay(ms) para imitar a latência de um servido
 Armazenamento no localStorage:
 Os dados são salvos e recuperados do navegador utilizando chaves prefixadas com lunysse_, evitando conflitos com outros sistemas:
 
-lunysse_users → Usuários (psicólogos e pacientes)
-
-lunysse_patients → Dados detalhados dos pacientes
-
-lunysse_appointments → Agendamentos e sessões
-
-lunysse_requests → Solicitações de novos pacientes
+mindhope_users → Usuários (psicólogos e pacientes)
+mindhope_patients → Dados detalhados dos pacientes
+mindhope_appointments → Agendamentos e sessões
+mindhope_requests → Solicitações de novos pacientes
 
 Dados iniciais:
 Caso não exista nada no localStorage, o sistema cria registros padrão:
 
 Usuários de teste (psicólogos e pacientes)
-
 Pacientes vinculados a psicólogos
-
 Agendamentos passados e futuros
-
 Solicitações pendentes
-
 Funcionalidades principais
-
 Login (login)
 Valida email e senha, retornando usuário autenticado e token fake.
 A senha nunca é retornada.
@@ -271,31 +260,19 @@ O projeto segue um design moderno e responsivo, baseado em TailwindCSS com uma p
 Paleta de Cores
 
 Dark (#172738) → fundo escuro, textos de contraste
-
 Medium (#005FA3) → azul médio, usado em áreas principais (sidebar, headers)
-
 Light (#2EC4F3) → azul claro, usado para realces e bordas de foco
-
 Accent (#1A73E8) → azul de destaque, usado em links e hover de botões
-
 Button (#1E293B) → fundo dos botões principais
-
 Background (#F5F9FF) → fundo claro para seções e cartões
 
 Estilo Global
-
 Fonte: Roboto (com fallback Inter/Nunito)
-
 Background padrão: gradiente linear do azul claro → azul médio → azul escuro
-
 Texto padrão: branco, para contraste com o fundo
-
 Componentes estilizados
-
 Botões primários (.btn-primary): fundo escuro → muda para azul de destaque no hover, com efeito de zoom.
-
 Inputs (.input-field): fundo branco, borda suave, foco com brilho azul claro.
-
 Sidebar / Navbar: seguem a paleta (bg-dark, bg-medium) com textos em text-light e text-accent nos destaques.
 
 ## 🛣️ Rotas da Aplicação
@@ -307,11 +284,8 @@ A navegação do MindHope é gerenciada com React Router DOM, dividida em rotas 
 Disponíveis para todos os usuários, mesmo sem login:
 
 / → Home
-
 /about → Sobre a Plataforma
-
 /login → Tela de Login
-
 /register → Cadastro de novo usuário
 
 ⚡ Caso o usuário já esteja logado, ao tentar acessar uma rota pública, ele é redirecionado automaticamente para /dashboard.
@@ -322,25 +296,15 @@ Disponíveis apenas para usuários autenticados.
 Essas rotas só podem ser acessadas após o login. Caso contrário, o usuário é redirecionado para /login.
 
 /dashboard → Painel principal
-
 Psicólogos veem o DashboardPsicologo
-
 Pacientes veem o DashboardPaciente
-
 /agendamentos → Lista e gerenciamento de agendamentos
-
 /solicitacoes → Solicitações de novos pacientes (apenas psicólogos)
-
 /pacientes → Lista de pacientes vinculados
-
 /pacientes/:id → Detalhes de um paciente específico
-
 /sessao/:sessionId → Detalhes de uma sessão específica
-
 /chat-ia → Chat com inteligência artificial integrado
-
 /relatorios → Relatórios de atendimentos e gráficos
-
 /historico → Histórico de sessões anteriores
 
 🚫 Página de Erro
@@ -350,9 +314,7 @@ Pacientes veem o DashboardPaciente
 👉 Resumindo:
 
 Público: home, login, cadastro, sobre.
-
 Protegido: tudo relacionado a pacientes, psicólogos, agendamentos e relatórios.
-
 Controle de acesso: feito pelo AuthContext com ProtectedRoute e PublicRoute.
 
 👥 Equipe
