@@ -268,7 +268,7 @@ Background (#F5F9FF) → fundo claro para seções e cartões
 
 Estilo Global
 Fonte: Roboto (com fallback Inter/Nunito)
-Background padrão: gradiente linear do azul claro → azul médio → azul escuro
+Background padrão: gradiente do azul claro → azul médio → azul escuro
 Texto padrão: branco, para contraste com o fundo
 Componentes estilizados
 Botões primários (.btn-primary): fundo escuro → muda para azul de destaque no hover, com efeito de zoom.
