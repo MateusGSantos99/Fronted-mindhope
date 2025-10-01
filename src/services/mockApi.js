@@ -12,10 +12,10 @@
   * Prefixo 'lunysse_' evita conflitos com outros dados no localStorage
   */
  const STORAGE_KEYS = {
-   USERS: 'lunysse_users',           // Usuários do sistema (psicólogos e pacientes)
-   PATIENTS: 'lunysse_patients',     // Dados detalhados dos pacientes
-   APPOINTMENTS: 'lunysse_appointments', // Agendamentos e sessões
-   REQUESTS: 'lunysse_requests'      // Solicitações de novos pacientes
+   USERS: 'mind_hope_users',           // Usuários do sistema (psicólogos e pacientes)
+   PATIENTS: 'mind_hopee_patients',     // Dados detalhados dos pacientes
+   APPOINTMENTS: 'mind_hope_appointments', // Agendamentos e sessões
+   REQUESTS: 'mind_hope_requests'      // Solicitações de novos pacientes
  };
  
  /**

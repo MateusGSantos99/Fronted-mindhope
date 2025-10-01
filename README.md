@@ -1,115 +1,124 @@
-# 🌿 MindHope - Plataforma de Agendamento para Atendimento Psicológico Voluntário
+🌿 MindHope
 
-MindHope é uma plataforma web inovadora que conecta psicólogos voluntários a pessoas que buscam apoio emocional, simplificando o agendamento e a gestão de consultas psicológicas. Desenvolvida com React 19 e Vite, nossa missão é democratizar o acesso ao cuidado emocional por meio da tecnologia.
+MindHope é uma plataforma web que conecta psicólogos voluntários a pessoas que buscam apoio emocional, facilitando agendamento, gerenciamento de sessões e acompanhamento de pacientes.
+Desenvolvida com React 19, Vite 7 e Tailwind CSS 4, a plataforma busca democratizar o acesso ao cuidado emocional através da tecnologia.
 
-![Mind Hope logo](public/logo.png)
----
+📌 Índice
 
-## 📋 Índice
+Sobre o MindHope
 
-- [Sobre o MindHope](#sobre-o-mindhope)  
-- [Funcionalidades Principais](#funcionalidades-principais)  
-- [Tecnologias Utilizadas](#tecnologias-utilizadas)  
-- [Como Rodar o Projeto](#como-rodar-o-projeto)  
-- [Contas de Teste](#contas-de-teste)  
-- [Organização do Código](#organização-do-código)  
-- [API Simulada](#api-simulada)  
-- [Chat com Inteligência Artificial](#chat-com-inteligência-artificial)  
-- [Design e Componentes](#design-e-componentes)  
-- [Rotas da Aplicação](#rotas-da-aplicação)  
-- [Contribuição](#contribuição)  
-- [Licença](#licença)  
-- [Equipe](#equipe)  
+Funcionalidades
 
----
+Tecnologias
 
-## 🌱 Sobre o MindHope
+Como Rodar
 
-O MindHope nasceu para facilitar o acesso ao atendimento psicológico voluntário, promovendo uma rede de cuidado baseada em empatia, inovação e tecnologia. Nosso objetivo é aproximar psicólogos e pacientes, criando uma plataforma intuitiva, segura e acessível para todos.
+Contas de Teste
 
----
+Organização do Código
 
-## ✨ Funcionalidades Principais
+API Simulada
 
-### Para Psicólogos
+Chat com IA
 
-- Dashboard com visão geral dos pacientes e agendamentos  
-- Gerenciamento completo de sessões e histórico clínico  
-- Chat integrado com inteligência artificial para suporte  
-- Relatórios e gráficos para acompanhamento dos atendimentos  
-- Controle personalizado da agenda e disponibilidade  
+Design & UI
 
-### Para Pacientes
+Rotas da Aplicação
 
-- Agendamento simples e rápido de consultas  
-- Visualização de psicólogos disponíveis e horários livres  
-- Histórico de atendimentos e informações relevantes  
-- Interface intuitiva e acessível  
+Equipe
 
-### Segurança e Acessibilidade
+🌱 Sobre o MindHope
 
-- Autenticação segura com controle de acesso por perfil  
-- Interface responsiva, compatível com recursos assistivos  
-- Proteção rigorosa dos dados dos usuários  
+MindHope é uma rede de cuidado emocional baseada em empatia e tecnologia, que conecta psicólogos voluntários a pessoas que precisam de apoio.
 
----
+Objetivos principais:
 
-## 🛠 Tecnologias Utilizadas
+✅ Facilitar o acesso ao atendimento psicológico voluntário
 
-- React 19  
-- Vite 7  
-- Tailwind CSS 4  
-- React Router DOM  
-- Framer Motion  
-- Lucide React (Ícones)  
-- Recharts e Chart.js (Gráficos)  
-- React Hot Toast (Notificações)  
-- Hugging Face API para chat com IA  
+✅ Criar uma plataforma intuitiva, segura e responsiva
 
----
+✅ Permitir o acompanhamento completo de pacientes e sessões
 
-## 🚀 Como Rodar o Projeto
+✨ Funcionalidades Principais
+Para Psicólogos
 
-1. Clone o repositório:
+📊 Dashboard completo: visão de pacientes e agendamentos
 
-```bash
+🗂 Gerenciamento de sessões e histórico clínico
+
+🤖 Chat integrado com Inteligência Artificial para suporte
+
+📈 Relatórios e gráficos para acompanhamento de atendimentos
+
+📅 Controle de agenda e disponibilidade
+
+Para Pacientes
+
+🗓 Agendamento rápido de consultas
+
+🔍 Visualização de psicólogos disponíveis e horários livres
+
+📝 Histórico de atendimentos
+
+🎨 Interface intuitiva e acessível
+
+Segurança e Acessibilidade
+
+🔒 Autenticação segura com controle por perfil
+
+📱 Interface responsiva e compatível com recursos assistivos
+
+🛡 Proteção rigorosa dos dados do usuário
+
+🛠 Tecnologias Utilizadas
+
+React 19 & Vite 7
+
+Tailwind CSS 4
+
+React Router DOM
+
+Framer Motion
+
+Lucide React (Ícones)
+
+Recharts & Chart.js
+
+React Hot Toast (Notificações)
+
+Hugging Face API (chat com IA)
+
+💡 Extras: Projeto modular, fácil de escalar e estilizado com componentes reutilizáveis.
+
+🚀 Como Rodar o Projeto
+# Clone o repositório
 git clone https://github.com/seu-usuario/mindhope.git
 cd mindhope
 
-Instale as dependências:
-
+# Instale as dependências
 npm install
 # ou
 yarn install
 
-
-Configure as variáveis de ambiente:
-
+# Configure variáveis de ambiente
 cp .env.example .env
+# Adicione seu token Hugging Face no .env
 
-
-Depois, edite o arquivo .env para adicionar seu token Hugging Face.
-
-Inicie o servidor de desenvolvimento:
-
+# Inicie o servidor de desenvolvimento
 npm run dev
 # ou
 yarn dev
 
-
-Acesse a aplicação no navegador:
-
+# Acesse no navegador
 http://localhost:5173
 
-
-💻 Uso e Contas de Teste
-Usuários de teste
+💻 Contas de Teste
 Psicólogos
 Nome	Email	Senha	Especialidade
 Dr. João Silva	psicologo@test.com
 	123456	Psicologia Clínica
 Dra. Ana Costa	ana@test.com
-	123456	Terapia Cognitivo-Comportamental
+	123456	TCC
 Dr. Carlos Mendes	carlos@test.com
 	123456	Psicologia Infantil
 Dra. Lucia Ferreira	lucia@test.com
@@ -118,23 +127,124 @@ Paciente
 Nome	Email	Senha
 Maria Santos	paciente@test.com
 	123456
-Fluxo básico
 
-Faça login com uma das contas de teste.
+Fluxo rápido:
 
-Acesse o dashboard correspondente ao seu perfil.
+Login com qualquer conta
 
-Pacientes podem agendar consultas, selecionando psicólogo e horário.
+Acesse o dashboard correspondente
 
-Psicólogos podem gerenciar pacientes, sessões e visualizar relatórios.
+Pacientes agendam consultas
+
+Psicólogos gerenciam pacientes, sessões e relatórios
 
 📁 Organização do Código
 src/
-├── components/          # Componentes reutilizáveis da UI
-├── context/             # Contextos React (ex: AuthContext)
-├── pages/               # Páginas da aplicação
-├── routes/              # Configuração das rotas
-├── services/            # Serviços e integrações (API, IA)
-├── App.jsx              # Componente raiz
-├── main.jsx             # Entry point do React
-└── index.css            # Estilos globais (Tailwind)
+├─ assets/          # Imagens e ícones
+├─ components/      # Botões, cards, inputs, navbar, sidebar
+├─ context/         # AuthContext
+├─ pages/           # Páginas do sistema
+├─ routes/          # Configuração de rotas
+├─ services/        # API simulada e serviços IA
+├─ App.jsx          # Componente principal
+├─ main.jsx         # Ponto de entrada
+...
+
+🔌 API Simulada - Como Funciona
+
+O projeto não depende de backend real durante o desenvolvimento.
+
+✅ Características:
+
+Armazenamento usando localStorage
+
+Login, registro, agendamentos, consultas e solicitações simuladas
+
+Delay artificial para simular latência de rede
+
+Dados iniciais de teste criados automaticamente
+
+Exemplos de dados simulados:
+
+Usuários de teste (psicólogos e pacientes)
+
+Pacientes vinculados a psicólogos
+
+Agendamentos passados e futuros
+
+Solicitações pendentes
+
+🤖 Chat com Inteligência Artificial
+
+Modelo: zai-org/GLM-4.5 (Hugging Face)
+
+Especialização: Psicologia clínica
+
+Histórico de até 10 mensagens
+
+Respostas em Markdown para melhor legibilidade
+
+Exemplos de perguntas:
+
+“Técnicas para ansiedade”
+
+“Abordagem em terapia infantil”
+
+“Sinais de alerta em depressão”
+
+🎨 Design e Componentes
+
+Paleta de cores:
+
+Dark (#172738), Medium (#005FA3), Light (#2EC4F3), Accent (#1A73E8), Button (#1E293B), Background (#F5F9FF)
+
+Fonte: Roboto (fallback Inter/Nunito)
+
+Layout responsivo, moderno e clean
+
+Botões, inputs, sidebar e navbar estilizados com Tailwind
+
+🛣️ Rotas da Aplicação
+🔓 Rotas Públicas
+
+/ → Home
+
+/about → Sobre
+
+/login → Login
+
+/register → Cadastro
+
+Usuários logados: redirecionados para /dashboard.
+
+🔒 Rotas Protegidas
+
+/dashboard → Dashboard (Psicólogo ou Paciente)
+
+/agendamentos → Gerenciar consultas
+
+/solicitacoes → Solicitações de pacientes (Psicólogos)
+
+/pacientes → Lista de pacientes
+
+/pacientes/:id → Detalhes de paciente
+
+/sessao/:sessionId → Detalhes de sessão
+
+/chat-ia → Chat com IA
+
+/relatorios → Relatórios e gráficos
+
+/historico → Histórico de sessões
+
+🚫 Página de Erro
+
+* → NotFound
+
+👥 Equipe
+
+Desenvolvedor Principal: Mateus Gabriel Oliveira Santos
+
+Design: Mateus Gabriel Oliveira Santos
+
+Consultoria Psicológica: Conteúdo baseado em estudos e situações fictícias
