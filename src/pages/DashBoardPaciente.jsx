@@ -1,62 +1,63 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { mockApi } from '../services/mockApi';
+import { appointmentService, requestService, psychologistService } from '..services/apiService';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';
 import { LoadingSpinner } from '../components/LoadingSpinner';
 import { Calendar, Plus, Bell, Clock } from 'lucide-react';
-import toast from 'react-hot-toast';
+
 
 export const DashboardPaciente = () => {
   const { user } = useAuth();
-
   const [appointments, setAppointments] = useState([]);
   const [requests, setRequests] = useState([]);
-  const [psychologists, setPsychologists] = useState([]);
+  const [_psychologists, setPsychologists] = useState([]);
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const loadData = async () => {
       try {
-        const [requestData, psychologistData] = await Promise.all([
-          mockApi.getRequests(),
-          mockApi.getPsychologists()
+        const [psychologistData, appointmentsData] = await Promise.all([
+          psychologistService.getPsychologist(),
+          appointmentService.getAppointments()
         ]);
-
-        const userRequest = requestData.filter(req => req.patient.email === user.email);
-        setRequests(userRequest);
+        // Pacientes não podem acessar requests - apenas psicologos
+        let requestData = [];
+        try {
+          requestData = await requestService.getRequests();
+        } catch (error) {
+          //Ignora erro 403 para pacientes
+          if (!error.message.includes("403") && !error.message.includes('Apenas psicólogos')) {
+            throw error;
+          }
+        }  
+        setRequests(requestData);
         setPsychologists(psychologistData);
-
-        const allAppointments = await mockApi.getAppointmentsByEmail(user.email);
-        setAppointments(allAppointments);
+        setAppointments(appointmentsData);
       } catch (error) {
-        toast.error(error.message);
+        console.error('Erro ao carregar dados:', error);
       } finally {
         setLoading(false);
       }
     };
     loadData();
   }, [user.email]);
-
   if (loading) return <LoadingSpinner size="lg" />;
-
   const today = new Date();
   today.setHours(0, 0, 0, 0);
-
   const upcomingAppointments = appointments.filter(apt => {
     const appointmentDate = new Date(apt.date);
     appointmentDate.setHours(0, 0, 0, 0);
-    return appointmentDate >= today || apt.status === 'agendado';
+    return appointmentDate >= today && apt.status === 'agendado';
   });
-
-  const pastAppointments = appointments.filter(apt => {
-    const appointmentDate = new Date(apt.date);
-    return appointmentDate < today || apt.status === 'concluido';
-  });
-
+  const pastAppointments = appointments.filter(apt =>
+    new Date(apt.date) < new Date() || apt.status === 'concluido'
+  );
   const hasHistory = pastAppointments.length > 0;
 
+
+
+  
   return (
     <div className="space-y-6">
       <h1 className="text-3xl font-bold text-dark">Meu Dashboard</h1>

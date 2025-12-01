@@ -15,6 +15,7 @@ import { About } from '../pages/About';
 import { Login } from '../pages/Login';
 import { Register } from '../pages/Register';
 
+/*
 // Páginas protegidas (apenas para usuários autenticados)
 import { DashboardPsicologo } from '../pages/DashboardPsicologo';
 import { DashboardPaciente } from '../pages/DashboardPaciente';
@@ -26,7 +27,9 @@ import { SessaoDetalhes } from '../pages/SessaoDetalhes';
 import { ChatIA } from '../pages/ChatIA';
 import { Solicitacoes } from '../pages/Solicitacoes';
 import { Historico } from '../pages/Historico';
+*/
 import { NotFound } from '../pages/NotFound';
+
 
 /* ==============================
    Componente de rota protegida
@@ -113,60 +116,7 @@ export const AppRoutes = () => {
         {/* ==============================
            Rotas Protegidas
            ============================== */}
-        <Route path="/dashboard" element={
-          <ProtectedRoute>
-            <Dashboard /> {/* Escolhe dashboard de psicólogo ou paciente */}
-          </ProtectedRoute>
-        } />
-        
-        <Route path="/agendamentos" element={
-          <ProtectedRoute>
-            <Agendamentos />
-          </ProtectedRoute>
-        } />
-        
-        <Route path="/solicitacoes" element={
-          <ProtectedRoute>
-            <Solicitacoes />
-          </ProtectedRoute>
-        } />
-        
-        <Route path="/pacientes" element={
-          <ProtectedRoute>
-            <Pacientes />
-          </ProtectedRoute>
-        } />
-        
-        <Route path="/pacientes/:id" element={
-          <ProtectedRoute>
-            <PacienteDetalhes /> {/* Página de detalhes de paciente específico */}
-          </ProtectedRoute>
-        } />
-        
-        <Route path="/sessao/:sessionId" element={
-          <ProtectedRoute>
-            <SessaoDetalhes /> {/* Detalhes de sessão específica */}
-          </ProtectedRoute>
-        } />
-        
-        <Route path="/chat-ia" element={
-          <ProtectedRoute>
-            <ChatIA />
-          </ProtectedRoute>
-        } />
-        
-        <Route path="/relatorios" element={
-          <ProtectedRoute>
-            <Relatorios />
-          </ProtectedRoute>
-        } />
-        
-        <Route path="/historico" element={
-          <ProtectedRoute>
-            <Historico />
-          </ProtectedRoute>
-        } />
-        
+       
         {/* ==============================
            Rota para página 404
            ============================== */}
