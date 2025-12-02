@@ -1,17 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
-import { mockApi } from '../services/mockApi';
+import { psychologistService, requestService } from '../services/apiService';
 import { Card } from '../components/Card';
 import { Button } from '../components/Button';
 import { Bell } from 'lucide-react';
 import toast from 'react-hot-toast'; 
-import { PsychologistSelect } from '../components/PsychologistSelect';
-
 export const Agendamentos = () => {
   const { user } = useAuth();
   const navigate = useNavigate();
-
   const [selectedPsychologist, setSelectedPsychologist] = useState('');
   const [psychologists, setPsychologists] = useState([]);
   const [submitting, setSubmitting] = useState(false);
@@ -19,38 +16,36 @@ export const Agendamentos = () => {
     description: '',
     urgency: 'media'
   });
-
   useEffect(() => {
     loadPsychologists();
   }, []);
-
   const loadPsychologists = async () => {
     try {
-      const data = await mockApi.getPsychologists();
+      const data = await psychologistService.getPsychologists();
       setPsychologists(data);
     } catch {
       toast.error('Erro ao carregar psicólogos');
     }
   };
-
   const handleRequestSubmit = async (e) => {
     e.preventDefault();
-    
     if (!selectedPsychologist || !requestData.description) {
-      toast.error('Selecione um psicólogo e descreva sua necessidade');
+      toast.error('Preencha todos os campos obrigatórios');
       return;
     }
-
     setSubmitting(true);
     
     try {
-      await mockApi.createRequest({
-        patientName: user.name,
-        patientEmail: user.email,
-        patientPhone: user.phone || '(11) 99999-9999',
+      await requestService.createRequest({
+        patient_id: user.id,
+        patient_name: user.name,
+        patient_email: user.email,
+        patient_phone: user.phone,
         preferredPsychologist: parseInt(selectedPsychologist),
         description: requestData.description,
-        urgency: requestData.urgency
+        urgency: requestData.urgency,
+        preferred_dates: [],
+        preferred_times: []
       });
       
       toast.success('Solicitação enviada! O psicólogo avaliará e entrará em contato se aceitar você como paciente.');

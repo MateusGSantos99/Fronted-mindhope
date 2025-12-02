@@ -1,31 +1,31 @@
 // Importação de rotas do React Router
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-
 // Importa contexto de autenticação
 import { useAuth } from '../context/AuthContext';
-
 // Componentes reutilizáveis
 import { Sidebar } from '../components/Sidebar';
 import { PublicNavbar } from '../components/PublicNavbar';
 import { LoadingSpinner } from '../components/LoadingSpinner';
-
 // Páginas públicas
 import  Home  from '../pages/Home';
 import { About } from '../pages/About';
 import { Login } from '../pages/Login';
 import { Register } from '../pages/Register';
-
-/*
 // Páginas protegidas (apenas para usuários autenticados)
 import { DashboardPsicologo } from '../pages/DashboardPsicologo';
 import { DashboardPaciente } from '../pages/DashboardPaciente';
 import { Agendamentos } from '../pages/Agendamentos';
+/*
 import { Relatorios } from '../pages/Relatorios';
+*/
 import { Pacientes } from '../pages/Pacientes';
+/*
 import { PacienteDetalhes } from '../pages/PacienteDetalhes';
 import { SessaoDetalhes } from '../pages/SessaoDetalhes';
+*/
 import { ChatIA } from '../pages/ChatIA';
 import { Solicitacoes } from '../pages/Solicitacoes';
+/*
 import { Historico } from '../pages/Historico';
 */
 import { NotFound } from '../pages/NotFound';
@@ -107,16 +107,48 @@ export const AppRoutes = () => {
           </PublicRoute>
         } />
         
-        <Route path="/register" element={
-          <PublicRoute>
-            <Register />
-          </PublicRoute>
-        } />
         
         {/* ==============================
            Rotas Protegidas
            ============================== */}
        
+       <Route path="/dashboard" element={
+          <ProtectedRoute>
+            <Dashboard />
+          </ProtectedRoute>
+        } />
+
+      <Route path="/chat-ia" element={
+                <ProtectedRoute>
+                  <ChatIA />
+                </ProtectedRoute>
+        } />
+      
+      <Route path="/agendamento" element={
+                <ProtectedRoute>
+                  <Agendamentos />
+                </ProtectedRoute>
+        } />
+      
+      <Route path="/solicitacoes" element={
+                <ProtectedRoute>
+                  <Solicitacoes />
+                </ProtectedRoute>
+        } />
+
+       <Route path="/register" element={
+          <PublicRoute>
+            <Register />
+          </PublicRoute>
+        } />
+
+        
+       <Route path="/pacientes" element={
+          <PublicRoute>
+            <Pacientes />
+          </PublicRoute>
+        } />
+
         {/* ==============================
            Rota para página 404
            ============================== */}
