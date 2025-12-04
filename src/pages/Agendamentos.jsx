@@ -41,12 +41,13 @@ export const Agendamentos = () => {
         patient_name: user.name,
         patient_email: user.email,
         patient_phone: user.phone,
-        preferredPsychologist: parseInt(selectedPsychologist),
+        preferred_psychologist: parseInt(selectedPsychologist),
         description: requestData.description,
         urgency: requestData.urgency,
         preferred_dates: [],
         preferred_times: []
       });
+      
       
       toast.success('Solicitação enviada! O psicólogo avaliará e entrará em contato se aceitar você como paciente.');
       navigate('/dashboard');

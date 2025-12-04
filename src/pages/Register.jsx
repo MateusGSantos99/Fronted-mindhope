@@ -49,11 +49,12 @@ export const Register = () => {
     email: '',
     password: '',
     confirmPassword: '',
-    crp: '',
+    crp: '',          // <-- CORRIGIDO
     specialty: '',
     phone: '',
     birthDate: ''
   });
+
   const [passwordValidation, setPasswordValidation] = useState({
     isValid: false,
     errors: {
@@ -64,6 +65,7 @@ export const Register = () => {
       hasSymbol: false
     }
   });
+
   const [loading, setLoading] = useState(false);
   const { register } = useAuth();
   const navigate = useNavigate();
@@ -74,7 +76,7 @@ export const Register = () => {
     // Aplicar máscaras
     if (field === 'phone') {
       value = phoneMask(value);
-    } else if (field === 'crm') {
+    } else if (field === 'crp') {        // <-- CORRIGIDO
       value = crpMask(value);
     }
    
@@ -89,7 +91,6 @@ export const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
  
-    // Validações
     if (!passwordValidation.isValid) {
       toast.error('A senha não atende aos critérios de segurança');
       return;
@@ -100,14 +101,12 @@ export const Register = () => {
       return;
     }
  
-    // Validar telefone
     const phoneNumbers = formData.phone.replace(/\D/g, '');
     if (phoneNumbers.length < 10 || phoneNumbers.length > 11) {
       toast.error('Telefone deve ter 10 ou 11 dígitos');
       return;
     }
  
-    // Validar CRP para psicólogos
     if (userType === 'psicologo') {
       const crpNumbers = formData.crp.replace(/\D/g, '');
       if (crpNumbers.length < 6) {
@@ -124,10 +123,10 @@ export const Register = () => {
         email: formData.email,
         password: formData.password,
         type: userType === 'psicologo' ? 'psicologo' : 'paciente',
-        phone: formData.phone.replace(/\D/g, '') || null,
+        phone: phoneNumbers || null,
         ...(userType === 'psicologo' && {
           specialty: formData.specialty,
-          crp: formData.crm.replace(/\D/g, '')
+          crp: formData.crp.replace(/\D/g, '')    // <-- CORRIGIDO
         }),
         ...(userType === 'paciente' && {
           birth_date: formData.birthDate
@@ -150,8 +149,8 @@ export const Register = () => {
     <div className="min-h-[calc(100vh-80px)] flex items-center justify-center p-2 sm:p-4">
       <Card className="w-500 max-w-xs sm:max-w-lg">
         <div className="text-center mb-4 sm:mb-8">
-          <h1 className="text-xl sm:text-4xl font-bold text-dark mb-2">{"Criar Conta"}</h1>
-          <p className="text-xs sm:text-base text-dark/70">Cadastre-se na lunysse</p>
+          <h1 className="text-xl sm:text-4xl font-bold mb-2">{"Criar Conta"}</h1>
+          <p className="text-xs sm:text-base">Cadastre-se na lunysse</p>
         </div>
  
         {/* User Type Selector */}
@@ -203,6 +202,7 @@ export const Register = () => {
               placeholder="Sua senha"
               required
             />
+
             {formData.password && (
               <div className="mt-2 p-3 bg-gray-50 rounded-lg">
                 <p className="text-xs font-medium text-gray-700 mb-2">Critérios de segurança:</p>
@@ -255,11 +255,10 @@ export const Register = () => {
           {userType === 'psicologo' && (
             <>
               <Input
-                label="CRP (Conselho Regional de Psicologia)"
-                value={formData.crp}
-                onChange={handleInputChange('crm')}
-                placeholder="Ex: CRP 01/12345"
-                maxLength="8"
+                label="CRP"
+                value={formData.crp}                            // <-- CORRIGIDO
+                onChange={handleInputChange('crp')}             // <-- CORRIGIDO
+                placeholder="Ex: 12/34567"
                 required
               />
  
@@ -267,7 +266,7 @@ export const Register = () => {
                 label="Especialidade"
                 value={formData.specialty}
                 onChange={handleInputChange('specialty')}
-                placeholder="Ex: Psicologia Clínica, Terapia Cognitiva"
+                placeholder="Ex: Psicologia Clínica"
                 required
               />
  
@@ -317,14 +316,14 @@ export const Register = () => {
  
         <div className="mt-3 sm:mt-6 text-center space-y-1 sm:space-y-2">
           <p className="text-xs sm:text-base text-dark/70">
-            {"Já tem uma conta?"}{' '}
+            Já tem uma conta?{' '}
             <Link to="/login" className="text-light hover:text-accent font-medium">
-              {"Fazer login"}
+              Fazer login
             </Link>
           </p>
           <p className="text-xs sm:text-base text-dark/70">
             <Link to="/" className="text-light hover:text-accent font-medium">
-              {"← Voltar ao início"}
+              ← Voltar ao início
             </Link>
           </p>
         </div>
@@ -332,4 +331,3 @@ export const Register = () => {
     </div>
   );
 };
- 
